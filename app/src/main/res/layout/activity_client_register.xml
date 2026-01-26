@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC"
+    android:fillViewport="true"
+    tools:context=".auth.ClientRegisterActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Client Registration"
+            android:textColor="#1E293B"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Create your account to get started"
+            android:textColor="#64748B"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <LinearLayout
+            android:id="@+id/formContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSubtitle">
+
+            <TextView style="@style/LabelStyle" android:text="Full Name" />
+            <EditText
+                android:id="@+id/etFullName"
+                style="@style/InputStyle"
+                android:hint="Enter your full name"
+                android:inputType="textPersonName"
+                android:drawableStart="@drawable/ic_person" />
+
+            <TextView style="@style/LabelStyle" android:text="Email Address" />
+            <EditText
+                android:id="@+id/etEmail"
+                style="@style/InputStyle"
+                android:hint="Enter your email"
+                android:inputType="textEmailAddress"
+                android:drawableStart="@drawable/ic_email" />
+
+            <TextView style="@style/LabelStyle" android:text="Password" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/etPassword"
+                    style="@style/InputStyle"
+                    android:hint="Create a password"
+                    android:inputType="textPassword"
+                    android:drawableStart="@drawable/ic_lock" />
+                <ImageView
+                    android:id="@+id/ivPasswordToggle"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:alpha="0.5"
+                    android:src="@drawable/ic_visibility" />
+            </FrameLayout>
+
+            <TextView style="@style/LabelStyle" android:text="Confirm Password" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/etConfirmPassword"
+                    style="@style/InputStyle"
+                    android:hint="Confirm your password"
+                    android:inputType="textPassword"
+                    android:drawableStart="@drawable/ic_lock" />
+                <ImageView
+                    android:id="@+id/ivConfirmPasswordToggle"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:alpha="0.5"
+                    android:src="@drawable/ic_visibility" />
+            </FrameLayout>
+
+            <TextView style="@style/LabelStyle" android:text="Phone Number" />
+            <EditText
+                android:id="@+id/etPhone"
+                style="@style/InputStyle"
+                android:hint="Enter your phone number"
+                android:inputType="phone"
+                android:drawableStart="@drawable/ic_phone" />
+
+            <TextView style="@style/LabelStyle" android:text="Address" />
+            <EditText
+                android:id="@+id/etAddress"
+                style="@style/InputStyle"
+                android:layout_height="100dp"
+                android:gravity="top"
+                android:hint="Enter your full address"
+                android:inputType="textMultiLine"
+                android:paddingTop="12dp"
+                android:drawableStart="@drawable/ic_location" />
+
+            <TextView style="@style/LabelStyle" android:text="Door Number" />
+            <EditText
+                android:id="@+id/etDoorNumber"
+                style="@style/InputStyle"
+                android:hint="Enter door number"
+                android:inputType="text"
+                android:drawableStart="@drawable/ic_home" />
+
+            <TextView style="@style/LabelStyle" android:text="Pincode" />
+            <EditText
+                android:id="@+id/etPincode"
+                style="@style/InputStyle"
+                android:hint="Enter pincode"
+                android:inputType="number"
+                android:drawableStart="@drawable/ic_pin" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="#2563EB"
+            android:text="Register"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/formContainer" />
+
+        <LinearLayout
+            android:id="@+id/footerLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="32dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnRegister">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Already have an account?"
+                android:textColor="#64748B" />
+
+            <TextView
+                android:id="@+id/tvSignIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign in"
+                android:textColor="#2563EB"
+                android:textStyle="bold"
+                android:padding="4dp"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

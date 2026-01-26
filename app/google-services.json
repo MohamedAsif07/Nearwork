@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "530960611798",
+    "project_id": "nearwork-b9875",
+    "storage_bucket": "nearwork-b9875.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530960611798:android:3997e3d969e4d7cf6d4c77",
+        "android_client_info": {
+          "package_name": "com.workers.nearwork"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZS9peAMuZXTYap9V2MZNZZP4Mf3US9YI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
