@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.play.services.location)
     implementation(libs.androidx.work.runtime.ktx)
     implementation("com.firebaseui:firebase-ui-firestore:8.0.2")
+    implementation("com.github.bumptech.glide:glide:4.15.1")
 
     // Testing
     testImplementation(libs.junit)

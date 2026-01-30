@@ -59,6 +59,7 @@
                 android:layout_marginBottom="12dp">
 
                 <TextView
+                    android:id="@+id/tvRecommendationTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Recommended Workers"
@@ -91,7 +92,6 @@
                 android:textColor="#1E293B"
                 app:backgroundTint="#F1F5F9"
                 app:cornerRadius="12dp"
-
                 app:iconGravity="textStart"
                 app:iconTint="#1E293B" />
 
@@ -106,7 +106,6 @@
                 android:textColor="#1E293B"
                 app:backgroundTint="#F1F5F9"
                 app:cornerRadius="12dp"
-
                 app:iconGravity="textStart"
                 app:iconTint="#1E293B" />
 

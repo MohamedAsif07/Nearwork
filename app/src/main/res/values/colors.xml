@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="primary_blue">#2563EB</color> <color name="bg_light_blue">#E8F0FE</color> <color name="text_dark">#1F2937</color>
+
     <color name="text_hint">#6B7280</color>
+
+        <color name="primary_blue">#3062D4</color>
+        <color name="primary_green">#28A745</color>
+        <color name="bg_light_gray">#F5F6FA</color>
+        <color name="text_dark">#212121</color>
+        <color name="text_gray">#757575</color>
+        <color name="white">#FFFFFF</color>
+        <color name="stroke_color">#E0E0E0</color>
+
+        <color name="white_20_percent">#33FFFFFF</color>
+        <color name="blue_10_percent">#1A3062D4</color>
+        <color name="green_10_percent">#1A28A745</color>
+
 
 </resources>

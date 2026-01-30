@@ -1,6 +1,8 @@
 package com.workers.nearwork.auth
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.widget.*
@@ -22,7 +24,7 @@ class ClientRegisterActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        // 1. Initialize Views (including Confirm Password)
+        // 1. Initialize Views
         val etFullName = findViewById<EditText>(R.id.etFullName)
         val etEmail = findViewById<EditText>(R.id.etEmail)
         val etPassword = findViewById<EditText>(R.id.etPassword)
@@ -57,7 +59,6 @@ class ClientRegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // NEW: Check if passwords match
             if (password != confirmPassword) {
                 etConfirmPassword.error = "Passwords do not match"
                 etConfirmPassword.requestFocus()
@@ -69,7 +70,7 @@ class ClientRegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Show a simple progress message
+            // Disable button
             btnRegister.isEnabled = false
             btnRegister.text = "Registering..."
 
@@ -85,7 +86,6 @@ class ClientRegisterActivity : AppCompatActivity() {
                     btnRegister.isEnabled = true
                     btnRegister.text = "Register"
 
-                    // NEW: Check for existing email error
                     if (e is FirebaseAuthUserCollisionException) {
                         etEmail.error = "This email is already registered"
                         etEmail.requestFocus()
@@ -104,12 +104,14 @@ class ClientRegisterActivity : AppCompatActivity() {
         var isVisible = false
         imageView.setOnClickListener {
             if (isVisible) {
+                // Hide Password
                 editText.transformationMethod = PasswordTransformationMethod.getInstance()
-                imageView.setImageResource(R.drawable.ic_visibility) // change to your eye-off icon if you have one
+                imageView.setImageResource(R.drawable.ic_visibility)
                 isVisible = false
             } else {
+                // Show Password
                 editText.transformationMethod = HideReturnsTransformationMethod.getInstance()
-                imageView.setImageResource(R.drawable.ic_visibility) // change to eye-on icon
+                imageView.setImageResource(R.drawable.ic_visibility)
                 isVisible = true
             }
             editText.setSelection(editText.text.length)
@@ -125,14 +127,17 @@ class ClientRegisterActivity : AppCompatActivity() {
             "address" to address,
             "doorNo" to door,
             "pincode" to pincode,
-            "role" to "client",
+            "role" to "client", // Explicitly saving role
             "createdAt" to System.currentTimeMillis()
         )
 
+        // SAVING TO "users" COLLECTION
         db.collection("users").document(uid)
             .set(data)
             .addOnSuccessListener {
                 Toast.makeText(this, "Registration Successful", Toast.LENGTH_SHORT).show()
+                // Redirect to Client Login or Home
+                startActivity(Intent(this, ClientLoginActivity::class.java))
                 finish()
             }
             .addOnFailureListener {

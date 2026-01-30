@@ -7,7 +7,6 @@ import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -16,17 +15,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.android.material.button.MaterialButton
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.workers.nearwork.R
 import com.workers.nearwork.model.WorkPost
+import com.workers.nearwork.utils.WrapContentLinearLayoutManager
 
 class WorkerHomeActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: FirestoreRecyclerAdapter<WorkPost, WorkViewHolder>
+    // Adapter is nullable because we wait for the category to load before creating it
+    private var adapter: FirestoreRecyclerAdapter<WorkPost, WorkViewHolder>? = null
+
     private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,33 +37,54 @@ class WorkerHomeActivity : AppCompatActivity() {
 
         // 1. Initialize RecyclerView
         recyclerView = findViewById(R.id.rvWorkList)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        // Use the new class you just created
+        recyclerView.layoutManager = WrapContentLinearLayoutManager(this)
 
-        setupFirestoreList()
-
-        // ---------------------------------------------------------
-        // ADDED: Logic for "Assigned Work" Button
-        // ---------------------------------------------------------
-        val btnAssignedWork = findViewById<MaterialButton>(R.id.btnAssignedWork)
+        // 2. We do NOT call setupFirestoreList() here immediately.
+        // We must find out if the worker is a "Plumber" or "Electrician" first.
+        fetchWorkerCategoryAndLoadJobs()
+        val btnAssignedWork = findViewById<com.google.android.material.button.MaterialButton>(R.id.btnAssignedWork)
 
         btnAssignedWork.setOnClickListener {
-            // We navigate to AssignedWorkActivity (The List), NOT the Details page directly.
-            // Navigating directly to RequestedWorkDetailsActivity here would crash
-            // because we haven't selected a specific job ID yet.
+            // Navigate to the list of jobs where the worker is hired
             val intent = Intent(this, AssignedWorkActivity::class.java)
             startActivity(intent)
         }
+    }
 
-        // Optional: History Button Logic
-        val btnHistory = findViewById<MaterialButton>(R.id.btnHistory)
-        btnHistory.setOnClickListener {
-            Toast.makeText(this, "History feature coming soon", Toast.LENGTH_SHORT).show()
+    private fun fetchWorkerCategoryAndLoadJobs() {
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            // Get the worker's profile to find their category
+            db.collection("workers").document(currentUser.uid)
+                .get()
+                .addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        // Get the category (e.g., "plumber")
+                        // Ensure this matches the field name in your Registration Activity ("category")
+                        val myCategory = document.getString("category")
+
+                        if (!myCategory.isNullOrEmpty()) {
+                            // Now that we know the category, load the specific jobs
+                            setupFirestoreList(myCategory)
+                        } else {
+                            Toast.makeText(this, "No category found in your profile.", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(this, "Worker profile not found.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Error fetching profile: ${it.message}", Toast.LENGTH_SHORT).show()
+                }
         }
     }
 
-    private fun setupFirestoreList() {
+    private fun setupFirestoreList(category: String) {
+        // 3. Query: Get 'open' jobs AND matching category
         val query = db.collection("work_posts")
             .whereEqualTo("status", "open")
+            .whereEqualTo("category", category) // <--- THIS FILTERS THE LIST
             .orderBy("timestamp", Query.Direction.DESCENDING)
 
         val options = FirestoreRecyclerOptions.Builder<WorkPost>()
@@ -89,7 +113,6 @@ class WorkerHomeActivity : AppCompatActivity() {
                 }
 
                 holder.itemView.setOnClickListener {
-                    // This handles clicking a SPECIFIC job card
                     val docId = snapshots.getSnapshot(position).id
                     val intent = Intent(this@WorkerHomeActivity, RequestedWorkDetailsActivity::class.java)
                     intent.putExtra("WORK_POST_ID", docId)
@@ -97,17 +120,20 @@ class WorkerHomeActivity : AppCompatActivity() {
                 }
             }
         }
+
         recyclerView.adapter = adapter
+        adapter?.startListening()
     }
 
     override fun onStart() {
         super.onStart()
-        adapter.startListening()
+        // Only listen if adapter is created
+        adapter?.startListening()
     }
 
     override fun onStop() {
         super.onStop()
-        adapter.stopListening()
+        adapter?.stopListening()
     }
 
     class WorkViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -83,6 +83,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:text="Phone Number"
+                    android:textColor="#333333"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_input"
+                    android:hint="+1 234 567 8900"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:textColor="@color/black"
+                    android:inputType="phone" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:text="Password"
                     android:textColor="#333333"
                     android:textStyle="bold" />
@@ -265,10 +285,33 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_input">
 
+                    <TextView
+                        android:id="@+id/tvSelectedDomain"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="40dp"
+                        android:text="Select your domain"
+                        android:textColor="#9E9E9E"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="12dp"
+                        android:src="@android:drawable/arrow_down_float"
+                        app:tint="#757575" />
+
                     <Spinner
                         android:id="@+id/spinnerDomain"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:alpha="0"
+                        android:spinnerMode="dropdown" />
                 </RelativeLayout>
 
                 <TextView

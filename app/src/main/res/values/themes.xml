@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.Nearwork" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.NearWork" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">#2563EB</item>
         <item name="colorPrimaryVariant">#1D4ED8</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -17,6 +17,30 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="LabelText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#64748B</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="DetailBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_detail_box</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:layout_marginBottom">24dp</item>
+    </style>
+
+    <style name="DetailValue">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#0F172A</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="InputStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">52dp</item>
@@ -27,7 +51,9 @@
         <item name="android:textColor">#1E293B</item>
         <item name="android:textColorHint">#94A3B8</item>
         <item name="android:textSize">15sp</item>
-        <item name="android:drawableTint">#94A3B8</item> </style>
+        <item name="android:drawableTint">#94A3B8</item>
+    </style>
+
     <style name="CircleImage">
         <item name="cornerSize">50%</item>
     </style>

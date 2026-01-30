@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_light_blue"
+    android:background="@color/blue_10_percent"
     android:fillViewport="true"
     android:scrollbars="none">
 
@@ -186,7 +186,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:gravity="center"
-                    android:text="Need help accessing your account?\nContact Support"
+                    android:text=" Are You New Friend? Sing Up"
                     android:textColor="@color/primary_blue"
                     android:lineSpacingExtra="4dp" />
 
