@@ -116,5 +116,22 @@ class PendingWorkDetailsActivity : AppCompatActivity() {
                 startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phone")))
             }
         }
+
+        findViewById<Button>(R.id.btnMessage).setOnClickListener {
+            if (phone.isNotEmpty()) {
+                // Clean the phone number: removes "+", "-", and spaces for the WhatsApp API
+                val cleanNumber = phone.replace(Regex("[^0-9]"), "")
+                val whatsappUri = Uri.parse("https://wa.me/$cleanNumber")
+
+                val intent = Intent(Intent.ACTION_VIEW, whatsappUri)
+                try {
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    Toast.makeText(this, "WhatsApp is not installed", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "Phone number is missing", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

@@ -49,7 +49,7 @@ class CreateWorkPostActivity : AppCompatActivity() {
     private var long: Double = 0.0
 
     // TODO: PUT YOUR SECRET KEY HERE
-    private val GEMINI_API_KEY = "AIzaSyD4M-SfrVSj9ZHGPFJo3F2NksNsqUxd6wM"
+    private val GEMINI_API_KEY = "AIzaSyAUydgsEkk_Gd-zjKf8ZUv8l-yXAgaFCKc"
 
     private val geminiService by lazy {
         Retrofit.Builder()
@@ -111,12 +111,24 @@ class CreateWorkPostActivity : AppCompatActivity() {
     private fun generateAIDescription(base64Image: String) {
         if (base64Image.isEmpty()) return
 
-        etDesc.setText("AI is analyzing photo...")
+        // Show loading state to the user
+        etDesc.setText("AI is preparing a technical brief for the worker...")
+
+        // This prompt is designed to help the worker come prepared
+        val workerPrepPrompt = """
+        Act as an expert manual labor consultant. Analyze this photo and provide:
+        1. **Task Brief**: What exactly needs to be done?
+        2. **Tool Checklist**: List specific tools or materials the worker should bring.
+        3. **Preparation Suggestion**: One tip for the worker to prepare (e.g., 'Ensure the main power is off' or 'Clear the area under the sink').
+        4. **Complexity**: Rate as Simple, Moderate, or Expert.
+        
+        Keep the tone professional and helpful for a technician.
+    """.trimIndent()
 
         val request = GeminiRequest(
             contents = listOf(
                 Content(parts = listOf(
-                    Part(text = "What manual work is needed in this photo? Answer in 1 short sentence."),
+                    Part(text = workerPrepPrompt),
                     Part(inline_data = InlineData("image/jpeg", base64Image))
                 ))
             )
@@ -128,17 +140,23 @@ class CreateWorkPostActivity : AppCompatActivity() {
                 val aiText = response.candidates?.firstOrNull()?.content?.parts?.firstOrNull()?.text
 
                 withContext(Dispatchers.Main) {
-                    etDesc.setText(aiText?.trim() ?: "Could not describe photo.")
+                    if (!aiText.isNullOrBlank()) {
+                        // Update the description box with the detailed brief
+                        etDesc.setText(aiText.trim())
+                    } else {
+                        etDesc.setText("")
+                        etDesc.setHint("AI could not analyze. Please describe the work manually.")
+                    }
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     etDesc.setText("")
-                    Toast.makeText(this@CreateWorkPostActivity, "AI Error: 400 - Check Image/Key", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@CreateWorkPostActivity, "AI Analysis Error. Please type details.", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
-    
+
 
     private fun encodeImageUri(uri: Uri): String? {
         var inputStream: InputStream? = null

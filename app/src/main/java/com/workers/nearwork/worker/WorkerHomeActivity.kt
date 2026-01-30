@@ -43,6 +43,13 @@ class WorkerHomeActivity : AppCompatActivity() {
         // 2. We do NOT call setupFirestoreList() here immediately.
         // We must find out if the worker is a "Plumber" or "Electrician" first.
         fetchWorkerCategoryAndLoadJobs()
+        val btnHistoryActivity = findViewById<com.google.android.material.button.MaterialButton>(R.id.btnHistory)
+
+        btnHistoryActivity.setOnClickListener {
+            // Navigate to the list of jobs where the worker is hired
+            val intent = Intent(this, WorkerHistoryActivity::class.java)
+            startActivity(intent)
+        }
         val btnAssignedWork = findViewById<com.google.android.material.button.MaterialButton>(R.id.btnAssignedWork)
 
         btnAssignedWork.setOnClickListener {

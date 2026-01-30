@@ -6,7 +6,7 @@
     android:layout_marginBottom="12dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="2dp"
-    app:cardBackgroundColor="#FFFFFF">
+    app:cardBackgroundColor="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_person"
-            app:tint="#6B7280"
+            app:tint="#757575"
             android:background="@drawable/bg_circle_purple"
             android:padding="10dp"/>
 
@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="16dp"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <TextView

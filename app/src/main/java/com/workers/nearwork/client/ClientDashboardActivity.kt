@@ -20,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.workers.nearwork.R
 import com.workers.nearwork.model.Worker
+
 import java.util.Locale
 
 class ClientDashboardActivity : AppCompatActivity() {
@@ -175,6 +176,24 @@ class ClientDashboardActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
             startActivity(intent)
         }
+
+        // Ensure the variable name 'btnViewHistory' matches what you use below
+        val btnViewHistory = findViewById<Button>(R.id.btnViewHistory)
+
+        btnViewHistory.setOnClickListener {
+            try {
+
+                val intent = Intent(this, WorkHistoryActivity::class.java)
+                startActivity(intent)
+                // This ensures you don't keep opening new versions of the same screen
+                intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                startActivity(intent)
+            } catch (e: Exception) {
+                // This will print the ACTUAL reason if it fails to open
+                android.util.Log.e("NAV_ERROR", "Error opening History: ${e.message}")
+                Toast.makeText(this, "Could not open History", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
     // Helper to Capitalize Strings (plumber -> Plumber)
     private fun String.capitalize(): String {
@@ -191,3 +210,4 @@ class ClientDashboardActivity : AppCompatActivity() {
         val btnHire: Button = itemView.findViewById(R.id.btnHire)
     }
 }
+
