@@ -302,9 +302,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Bid Amt: "
-
+                    android:drawableStart="@drawable/ic_rupee"
                     android:textColorHint="@color/text_gray"
-
                     android:background="@null"
                     android:inputType="numberDecimal"
                     android:textColor="@color/black"
