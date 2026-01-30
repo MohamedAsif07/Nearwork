@@ -4,214 +4,216 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#F8FAFC"> <androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="#FFFFFF"
+    android:elevation="2dp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:navigationIcon="@drawable/ic_back">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:elevation="4dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_back">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Create Work Post"
-            android:textColor="#1E293B"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </androidx.appcompat.widget.Toolbar>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Post a New Task"
+        android:textColor="#0F172A"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+</androidx.appcompat.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@id/btnPostWork"
+        android:clipToPadding="false"
+        android:paddingBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="20dp">
 
             <TextView
-                style="@style/LabelStyle"
-                android:text="Work Category" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxStrokeColor="#2563EB"
-                app:hintTextColor="#2563EB">
-
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteDomain"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Select Category"
-                    android:inputType="none"
-                    android:textColor="#1E293B" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                style="@style/LabelStyle"
-                android:layout_marginTop="24dp"
-                android:text="Work Location" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:boxStrokeColor="#2563EB"
-                    app:hintTextColor="#2563EB">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etAddress"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Address"
-                        android:inputType="textMultiLine"
-                        android:maxLines="3"
-                        android:textColor="#1E293B" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <ImageView
-                    android:id="@+id/btnGetCurrentLocation"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:layout_marginStart="12dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/bg_input"
-                    android:padding="12dp"
-                    android:src="@drawable/ic_location"
-                    app:tint="#2563EB"
-                    android:contentDescription="Get Location" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tvLatLong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone" />
+                android:text="Task Details"
+                android:textColor="#64748B"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:letterSpacing="0.1"
+                android:layout_marginBottom="12dp"/>
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardUseCompatPadding="true">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    app:endIconDrawable="@drawable/ic_assingment"
-                    app:endIconMode="custom"
-                    app:endIconTint="#64748B"
-                    app:boxStrokeColor="#2563EB"
-                    app:hintTextColor="#2563EB">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etDate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:clickable="true"
-                        android:hint="Date"
-                        android:textColor="#1E293B" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    app:endIconDrawable="@drawable/baseline_access_time_filled_24"
-                    app:endIconMode="custom"
-                    app:endIconTint="#64748B"
-                    app:boxStrokeColor="#2563EB"
-                    app:hintTextColor="#2563EB">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:clickable="true"
-                        android:hint="Time"
-                        android:textColor="#1E293B" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-
-            <TextView
-                style="@style/LabelStyle"
-                android:layout_marginTop="24dp"
-                android:text="Estimated Budget ($)" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxStrokeColor="#2563EB"
-                app:hintTextColor="#2563EB">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etBudget"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="e.g. 100.00"
-                    android:inputType="numberDecimal"
-                    android:textColor="#1E293B" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Service Category"
+                        app:startIconDrawable="@drawable/ic_assingment"
+                        app:startIconTint="#2563EB">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/autoCompleteDomain"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="Describe what you need..."
+                        app:startIconDrawable="@drawable/ic_done"
+                        app:startIconTint="#2563EB">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:gravity="top"
+                            android:inputType="textMultiLine" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <TextView
-                style="@style/LabelStyle"
-                android:layout_marginTop="24dp"
-                android:text="Description" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location &amp; Schedule"
+                android:textColor="#64748B"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:letterSpacing="0.1"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="12dp"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="#2563EB"
-                app:hintTextColor="#2563EB">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardUseCompatPadding="true">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etDescription"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:gravity="top"
-                    android:hint="Describe the issue details..."
-                    android:inputType="textMultiLine"
-                    android:textColor="#1E293B" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Work Address">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etAddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textPostalAddress" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <ImageButton
+                            android:id="@+id/btnGetCurrentLocation"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_location"
+                            app:tint="#2563EB"
+                            android:contentDescription="Locate Me" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            android:hint="Date"
+                            app:startIconDrawable="@drawable/ic_history"
+                            app:startIconTint="#2563EB">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:focusable="false" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Time"
+                            app:startIconDrawable="@drawable/baseline_access_time_filled_24"
+                            app:startIconTint="#2563EB">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etTime"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:focusable="false" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <TextView
-                style="@style/LabelStyle"
-                android:layout_marginTop="24dp"
-                android:text="Photo Evidence" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Attachment"
+                android:textColor="#64748B"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:letterSpacing="0.1"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="12dp"/>
 
             <FrameLayout
                 android:id="@+id/layoutUpload"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_marginTop="8dp"
+                android:layout_height="160dp"
                 android:background="@drawable/bg_dashed_border"
-                android:clickable="true"
-                android:focusable="true">
+                android:backgroundTint="#CBD5E1">
 
                 <LinearLayout
                     android:id="@+id/placeholderUI"
@@ -222,46 +224,82 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/baseline_cloud_upload_24"
                         app:tint="#2563EB" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:text="Tap to upload image"
-                        android:textColor="#64748B"
+                        android:layout_marginTop="8dp"
+                        android:text="Add Photo Evidence"
+                        android:textColor="#2563EB"
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/ivImagePreview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.MediumComponent"/>
             </FrameLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="20dp"/>
 
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/btnPostWork"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="24dp"
-        android:backgroundTint="#2563EB"
-        android:text="Post Work Now"
-        android:textAllCaps="false"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:cornerRadius="12dp"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_height="wrap_content"
+        app:cardElevation="16dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Est. Budget"
+                    android:textColor="#64748B"
+                    android:textSize="12sp"/>
+
+                <EditText
+                    android:id="@+id/etBudget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="$ 0.00"
+                    android:background="@null"
+                    android:inputType="numberDecimal"
+                    android:textColor="#0F172A"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPostWork"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:text="Post Task"
+                android:paddingHorizontal="32dp"
+                app:cornerRadius="16dp"
+                android:backgroundTint="#2563EB"
+                android:textAllCaps="false"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
