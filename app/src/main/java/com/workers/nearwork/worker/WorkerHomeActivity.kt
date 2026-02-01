@@ -11,7 +11,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -25,7 +24,6 @@ import com.workers.nearwork.utils.WrapContentLinearLayoutManager
 class WorkerHomeActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    // Adapter is nullable because we wait for the category to load before creating it
     private var adapter: FirestoreRecyclerAdapter<WorkPost, WorkViewHolder>? = null
 
     private val db = FirebaseFirestore.getInstance()
@@ -35,44 +33,41 @@ class WorkerHomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_worker_home)
 
-        // 1. Initialize RecyclerView
+        // 1. Initialize UI Elements
         recyclerView = findViewById(R.id.rvWorkList)
-        // Use the new class you just created
         recyclerView.layoutManager = WrapContentLinearLayoutManager(this)
 
-        // 2. We do NOT call setupFirestoreList() here immediately.
-        // We must find out if the worker is a "Plumber" or "Electrician" first.
-        fetchWorkerCategoryAndLoadJobs()
         val btnHistoryActivity = findViewById<com.google.android.material.button.MaterialButton>(R.id.btnHistory)
-
-        btnHistoryActivity.setOnClickListener {
-            // Navigate to the list of jobs where the worker is hired
-            val intent = Intent(this, WorkerHistoryActivity::class.java)
-            startActivity(intent)
-        }
         val btnAssignedWork = findViewById<com.google.android.material.button.MaterialButton>(R.id.btnAssignedWork)
 
-        btnAssignedWork.setOnClickListener {
-            // Navigate to the list of jobs where the worker is hired
-            val intent = Intent(this, AssignedWorkActivity::class.java)
-            startActivity(intent)
+        // 2. Navigation Listeners
+        btnHistoryActivity.setOnClickListener {
+            startActivity(Intent(this, WorkerHistoryActivity::class.java))
         }
+
+        btnAssignedWork.setOnClickListener {
+            startActivity(Intent(this, AssignedWorkActivity::class.java))
+        }
+
+        // 3. Load User Profile and Jobs
+        fetchWorkerCategoryAndLoadJobs()
     }
 
     private fun fetchWorkerCategoryAndLoadJobs() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            // Get the worker's profile to find their category
             db.collection("workers").document(currentUser.uid)
                 .get()
                 .addOnSuccessListener { document ->
                     if (document.exists()) {
-                        // Get the category (e.g., "plumber")
-                        // Ensure this matches the field name in your Registration Activity ("category")
-                        val myCategory = document.getString("category")
+                        // --- GET AND SHOW WORKER NAME ---
+                        val workerName = document.getString("fullName")
+                        val tvUserName = findViewById<TextView>(R.id.tvUserName)
+                        tvUserName.text = workerName ?: "Worker"
 
+                        // --- GET CATEGORY AND LOAD LIST ---
+                        val myCategory = document.getString("category")
                         if (!myCategory.isNullOrEmpty()) {
-                            // Now that we know the category, load the specific jobs
                             setupFirestoreList(myCategory)
                         } else {
                             Toast.makeText(this, "No category found in your profile.", Toast.LENGTH_SHORT).show()
@@ -88,10 +83,10 @@ class WorkerHomeActivity : AppCompatActivity() {
     }
 
     private fun setupFirestoreList(category: String) {
-        // 3. Query: Get 'open' jobs AND matching category
+        // Query: Get 'open' jobs matching the worker's category
         val query = db.collection("work_posts")
             .whereEqualTo("status", "open")
-            .whereEqualTo("category", category) // <--- THIS FILTERS THE LIST
+            .whereEqualTo("category", category.lowercase()) // Ensuring case sensitivity matches registration
             .orderBy("timestamp", Query.Direction.DESCENDING)
 
         val options = FirestoreRecyclerOptions.Builder<WorkPost>()
@@ -109,6 +104,7 @@ class WorkerHomeActivity : AppCompatActivity() {
                 holder.tvTitle.text = model.category.replaceFirstChar { it.uppercase() }
                 holder.tvDesc.text = model.description
 
+                // Decode Image if exists
                 if (model.imageData.isNotEmpty()) {
                     try {
                         val decodedBytes = Base64.decode(model.imageData, Base64.DEFAULT)
@@ -134,7 +130,6 @@ class WorkerHomeActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        // Only listen if adapter is created
         adapter?.startListening()
     }
 

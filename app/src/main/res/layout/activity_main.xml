@@ -5,81 +5,103 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
-    android:background="#F5F8FF">
+    android:background="#FFFFFF">
 
-    <!-- Welcome Text -->
-    <TextView
-        android:id="@+id/tvWelcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:textColor="#111827"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.22"/>
-
-    <!-- Client Button -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnClient"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:text="Register / Login as Client"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:drawableStart="@drawable/ic_client"
-        android:drawableTint="@android:color/white"
-        android:drawablePadding="12dp"
-        android:gravity="center"
-        android:textAlignment="center"
-        app:backgroundTint="@null"
+    <View
+        android:id="@+id/viewHeaderBackground"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
         android:background="@drawable/bg_client_gradient"
-        app:cornerRadius="16dp"
-        app:layout_constraintTop_toBottomOf="@id/tvWelcome"
-        app:layout_constraintBottom_toTopOf="@id/btnWorker"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="40dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Worker Button -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnWorker"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:text="Register / Login as Worker"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:drawableStart="@drawable/ic_worker"
-        android:drawableTint="@android:color/white"
-        android:drawablePadding="12dp"
-        android:gravity="center"
-        android:textAlignment="center"
-        app:backgroundTint="@null"
-        android:background="@drawable/bg_worker_gradient"
-        app:cornerRadius="16dp"
-        app:layout_constraintTop_toBottomOf="@id/btnClient"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieIllustration"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        app:lottie_rawRes="@raw/connect"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:layout_constraintBottom_toBottomOf="@+id/viewHeaderBackground"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="20dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/viewHeaderBackground" />
 
-    <!-- Footer Text -->
-    <TextView
-        android:id="@+id/tvFooter"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Choose your account type to continue"
-        android:textSize="13sp"
-        android:textColor="#6B7280"
+        android:background="@drawable/bg_white_card_top_rounded"
+        android:orientation="vertical"
+        android:padding="32dp"
+        android:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="24dp"/>
+        app:layout_constraintTop_toBottomOf="@id/lottieIllustration"
+        app:layout_constraintVertical_bias="1.0">
+
+        <TextView
+            android:id="@+id/tvWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome to NearWork"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#111827"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="On-demand services at your doorstep"
+            android:textSize="15sp"
+            android:textColor="#6B7280"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="32dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnClient"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:text="I want to hire"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            app:backgroundTint="@null"
+            android:background="@drawable/bg_client_gradient"
+            app:cornerRadius="16dp"
+            android:layout_marginBottom="16dp"
+            app:icon="@drawable/ic_client"
+            app:iconGravity="textStart"
+            app:iconPadding="12dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnWorker"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:text="I am looking for work"
+            android:textColor="#2563EB"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            app:strokeColor="#2563EB"
+            app:strokeWidth="2dp"
+            app:cornerRadius="16dp"
+            app:icon="@drawable/ic_worker"
+            app:iconGravity="textStart"
+            app:iconPadding="12dp"/>
+
+        <TextView
+            android:id="@+id/tvFooter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose your account type to continue"
+            android:textSize="12sp"
+            android:textColor="#9CA3AF"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

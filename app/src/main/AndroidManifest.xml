@@ -16,10 +16,6 @@
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
 
-    <uses-feature
-        android:name="android.hardware.location.gps"
-        android:required="false" />
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -30,76 +26,40 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NearWork"
         tools:targetApi="31">
+
         <activity
-            android:name=".worker.WorkerHistoryActivity"
-            android:exported="false" />
-        <activity
-            android:name=".client.WorkHistoryActivity"
-            android:exported="false" />
-        <activity
-            android:name=".client.PendingWorkDetailsActivity"
-            android:exported="false" />
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"> <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".client.ClientHomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".client.DashboardActivity"
-            android:exported="false"
-            android:label="My Job Posts" />
-        <activity
-            android:name=".client.ClientDashboardActivity"
-            android:exported="false" />
-        <activity
-            android:name=".client.ApplicantsListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".client.AppliedWorkersActivity"
-            android:exported="false" />
-        <activity
-            android:name=".client.WorkerDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".client.CreateWorkPostActivity"
-            android:exported="false" />
-        <activity
-            android:name=".worker.WorkerHomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".worker.AcceptedWorkActivity"
-            android:exported="false" />
-        <activity
-            android:name=".worker.RequestedWorkDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".worker.AssignedWorkActivity"
-            android:exported="false" />
-        <activity
-            android:name=".worker.WorkerRegistrationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".worker.HiredJobsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".auth.WorkerLoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".auth.ClientLoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".auth.ClientSignupActivity"
-            android:exported="false" />
-        <activity
-            android:name=".auth.ClientRegisterActivity"
-            android:exported="false" />
+        <activity android:name=".worker.WorkerHistoryActivity" android:exported="false" />
+        <activity android:name=".client.WorkHistoryActivity" android:exported="false" />
+        <activity android:name=".client.PendingWorkDetailsActivity" android:exported="false" />
+        <activity android:name=".client.ClientHomeActivity" android:exported="false" />
+        <activity android:name=".client.DashboardActivity" android:exported="false" android:label="My Job Posts" />
+        <activity android:name=".client.ClientDashboardActivity" android:exported="false" />
+        <activity android:name=".client.ApplicantsListActivity" android:exported="false" />
+        <activity android:name=".client.AppliedWorkersActivity" android:exported="false" />
+        <activity android:name=".client.WorkerDetailsActivity" android:exported="false" />
+        <activity android:name=".client.CreateWorkPostActivity" android:exported="false" />
+        <activity android:name=".worker.WorkerHomeActivity" android:exported="false" />
+        <activity android:name=".worker.AcceptedWorkActivity" android:exported="false" />
+        <activity android:name=".worker.RequestedWorkDetailsActivity" android:exported="false" />
+        <activity android:name=".worker.AssignedWorkActivity" android:exported="false" />
+        <activity android:name=".worker.WorkerRegistrationActivity" android:exported="false" />
+        <activity android:name=".worker.HiredJobsActivity" android:exported="false" />
+        <activity android:name=".auth.WorkerLoginActivity" android:exported="false" />
+        <activity android:name=".auth.ClientLoginActivity" android:exported="false" />
+        <activity android:name=".auth.ClientSignupActivity" android:exported="false" />
+        <activity android:name=".auth.ClientRegisterActivity" android:exported="false" />
+
     </application>
-
 </manifest>
